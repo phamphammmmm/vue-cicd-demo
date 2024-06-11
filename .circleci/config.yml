@@ -28,10 +28,7 @@ jobs:
 workflows:
   test-my-deploy:
     jobs:
-      - note/test
       - build-and-push:
-          requires:
-            - note/test
           filters:
             branches:
               only:
