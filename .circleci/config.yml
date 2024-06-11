@@ -1,14 +1,38 @@
 version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+  docker: circleci/docker@2.6.0
+
 jobs:
-  say-hello:
-    docker:
-      - image: cimg/base:current
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: datpham2002/vue-cicd-demo
+      DOCKER_TAG: latest
+    executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
+      - docker/check:
+          { docker-username: DOCKER_USER, docker-password: DOCKER_PASSWORD }
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+
 workflows:
-  say-hello-workflow:
+  test-my-deploy:
     jobs:
-      - say-hello
+      - note/test
+      - build-and-push:
+          requires:
+            - note/test
+          filters:
+            branches:
+              only:
+                - main
