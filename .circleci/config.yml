@@ -5,7 +5,7 @@ orbs:
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: datpham2002/vue-cicd-demo
+      DOCKER_IMAGE: phamdat2002/test-cicd
       DOCKER_TAG: latest
     executor: docker/docker
     steps:
