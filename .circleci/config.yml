@@ -30,7 +30,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:pSvmLT3d/PPPz+oBHQRgJOF/7hepxMvPdgIHdZrMMlI"
+            - "SHA256:UFQjouHOQ5IAByFVtzb4sM8XFK8wSB83BH5aUyxMmLE"
       - run: ssh -oStrictHostKeyChecking=no root@103.186.65.162 './deploy.sh'
 
 workflows:
