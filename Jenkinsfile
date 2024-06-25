@@ -1,8 +1,10 @@
-pipeline{
-    agnet any{
-    stages {
-        stage('Clone'){
-            git 'https://github.com/phamphammmmm/vue-cicd-demo.git'
+pipeline {
+    agent any {
+        stages {
+            stage('Clone') {
+                steps {
+                    git 'https://github.com/phamphammmmm/vue-cicd-demo.git'
+                }
             }
         }
     }
