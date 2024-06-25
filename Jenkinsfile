@@ -12,6 +12,7 @@ pipeline {
         //         echo 'Building...'
         //     }
         // }
+        //
         // stage('Test') {
         //     steps {
         //         // Các bước để chạy test
