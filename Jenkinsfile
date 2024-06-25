@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/phamphammmmm/vue-cicd-demo.git'
+                git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
             }
         }
         // stage('Build') {
