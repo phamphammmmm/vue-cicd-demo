@@ -6,24 +6,9 @@ pipeline {
                 sh 'docker --version'
             }
         }
-        stage('Clone Repository') {
+        stage('Pull Hello-World Image') {
             steps {
-                git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                // withDockerRegistry(credentialsId: 'docker-hub', url: 'https://hub.docker.com/') {
-                // }
-                withDockerRegistry(credentialsId: 'docker-h', url: 'https://index.docker.io/v1') {
-                    sh 'docker build -t phamdat2002/test-cicd:latest .'                }
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                withDockerRegistry(credentialsId: 'docker-h', url: 'https://index.docker.io/v1') {
-                    sh 'docker push phamdat2002/test-cicd:latest'
-                }
+                sh 'docker pull hello-world'
             }
         }
     }
