@@ -18,13 +18,14 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-h', url: 'https://index.docker.io/v1') {
-                    sh 'docker build -t phamdat2002/test-cicd:latest .'                }
+                withDockerRegistry(credentialsId: 'docker-h', url: 'https://hub.docker.com') {
+                    sh 'docker build -t phamdat2002/test-cicd:latest .'                
+                }
             }
         }
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-h', url: 'https://index.docker.io/v1') {
+                withDockerRegistry(credentialsId: 'docker-h', url: 'https://hub.docker.com') {
                     sh 'docker push phamdat2002/test-cicd:latest'
                 }
             }
