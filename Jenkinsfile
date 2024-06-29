@@ -1,10 +1,11 @@
 pipeline {
     agent any
-    // environment {
-    //     DOCKER_HOST = 'tcp://docker:2376'
-    //     DOCKER_CERT_PATH = '/certs/client'
-    //     DOCKER_TLS_VERIFY = '1'
-    // }
+    environment {
+        // DOCKER_HOST = 'tcp://docker:2376'
+        // DOCKER_CERT_PATH = '/certs/client'
+        // DOCKER_TLS_VERIFY = '1'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-login'
+    }
     stages {
         stage('Debug Docker') {
             steps {
