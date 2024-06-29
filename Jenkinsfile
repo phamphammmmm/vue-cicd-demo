@@ -18,9 +18,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-login', url: 'https://index.docker.io/v1/') {
+                // withDockerRegistry(credentialsId: 'docker-login', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t phamdat2002/test-cicd:latest .'                
-                }
+                // }
             }
         }
         stage('Push Docker Image') {
