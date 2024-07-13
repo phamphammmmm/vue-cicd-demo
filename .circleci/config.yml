@@ -1,4 +1,5 @@
 version: 2.1
+
 orbs:
   node: circleci/node@3.0.0
   docker: circleci/docker@2.6.0
@@ -13,7 +14,8 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/check:
-          { docker-username: DOCKER_USER, docker-password: DOCKER_PASSWORD }
+          username: DOCKER_USER
+          password: DOCKER_PASSWORD
       - docker/build:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
@@ -31,7 +33,8 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:UFQjouHOQ5IAByFVtzb4sM8XFK8wSB83BH5aUyxMmLE"
-      - run: ssh -oStrictHostKeyChecking=no root@103.186.65.162 './deploy.sh'
+      - run:
+          command: ssh -oStrictHostKeyChecking=no root@103.186.65.162 './deploy.sh'
 
 workflows:
   test-my-deploy:
