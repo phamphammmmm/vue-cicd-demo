@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>THere are the step of step in order to cicd</h1>
-  <HelloWorld msg="Welcomeeeeee to Tien Dat Vue.js App" />
+  <HelloWorld msg="Welcom Tien Dat Vue.js App" />
 </template>
 
 <script>
