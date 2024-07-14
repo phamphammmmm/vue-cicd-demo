@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: phamdat2002/test-cicd:latest
     ports:
-      - "8080:80"
+      - "8081:80"
 
   nginx:
     image: nginx:alpine
