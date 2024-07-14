@@ -1,9 +1,6 @@
 pipeline {
     agent any
     environment {
-        // DOCKER_HOST = 'tcp://docker:2376'
-        // DOCKER_CERT_PATH = '/certs/client'
-        // DOCKER_TLS_VERIFY = '1'
         DOCKER_CREDENTIALS_ID = 'docker-hub-login'
     }
     stages {
@@ -20,7 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-hub-login', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t phamdat2002/test-cicd:latest .'                
+                    sh 'docker build -t phamdat2002/test-cicd:latest .'
                 }
             }
         }
@@ -29,6 +26,12 @@ pipeline {
                 withDockerRegistry(credentialsId: 'docker-hub-login', url: 'https://index.docker.io/v1/') {
                     sh 'docker push phamdat2002/test-cicd:latest'
                 }
+            }
+        }
+        stage('Deploy Docker Image') {
+            steps {
+                sh 'docker pull phamdat2002/test-cicd:latest'
+                sh 'docker run -d -p 8000:80 phamdat2002/test-cicd:latest'
             }
         }
     }
