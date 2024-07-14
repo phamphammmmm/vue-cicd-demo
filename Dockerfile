@@ -10,6 +10,8 @@ RUN npm run build
 COPY ./nginx/conf.d/ /etc/nginx/conf.d/
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/ssl/ /etc/nginx/ssl/
+COPY ./nginx/domain/datdev.cloud.cert /etc/nginx/cert/datdev.cloud.cert
+COPY ./nginx/domain/datdev.cloud.key /etc/nginx/cert/datdev.cloud.key
 
 # Remove default Nginx configuration if needed
 RUN rm -rf /etc/nginx/conf.d/default.conf
