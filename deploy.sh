@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # Dừng các container đang chạy
 sudo docker-compose stop
 
