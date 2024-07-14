@@ -14,6 +14,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
             }
         }
+        stage('Set Permissions') {
+            steps {
+                sh 'chmod +x deploy.sh'
+                sh 'sudo usermod -aG docker jenkins'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-hub-login', url: 'https://index.docker.io/v1/') {
@@ -30,8 +36,9 @@ pipeline {
         }
         stage('Deploy Docker Image') {
             steps {
-                sh 'docker pull phamdat2002/test-cicd:latest'
-                sh 'docker run -d -p 8000:80 phamdat2002/test-cicd:latest'
+                script {
+                    sh './deploy.sh'
+                }
             }
         }
     }
