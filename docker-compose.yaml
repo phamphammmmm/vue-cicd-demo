@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: phamdat2002/test-cdcd:latest
+    container_name: phamdat2002-test-cdcd
     ports:
       - "8081:80"
 
