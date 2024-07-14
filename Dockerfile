@@ -10,6 +10,9 @@ RUN npm run build
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
+# Cài đặt OpenSSL
+RUN apk add --no-cache openssl
+
 # Tạo thư mục cho SSL/TLS configuration và copy key, cert vào
 RUN mkdir -p /etc/nginx/ssl
 
