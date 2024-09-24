@@ -4,11 +4,23 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'docker-hub-login'
     }
     stages {
-        stage('Debug Docker') {
+        stage('Check branch') {
             steps {
-                sh 'docker --version'
+                script {
+                    if (env.BRANCH_NAME == 'master') {
+                        echo 'I only execute on the master branch'
+                    } else {
+                        echo 'I execute elsewhere'
+                    }
+                }
+            }
+
+            steps{
+                input 'Do you approve deployment?'
+                echo 'Hello Prod'
             }
         }
+
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
