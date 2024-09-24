@@ -10,7 +10,7 @@ pipeline {
                     if (env.BRANCH_NAME == 'master') {
                         echo 'I only execute on the master branch'
                     } else {
-                        echo 'I execute elsewhere'
+                        echo "I execute on branch ${env.BRANCH_NAME}"
                     }
                 }
                 input 'Do you approve deployment?'
