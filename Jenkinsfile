@@ -4,19 +4,14 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'docker-hub-login'
     }
 
-    parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Git branch to build from')
-    }
-
     stages {
         stage('Check branch') {
             steps {
                 script {
-                    def branchName = env.BRANCH_NAME
                     if (branchName == 'main') {
                         echo 'I only execute on the main branch'
                     } else {
-                        echo "I execute on branch ${branchName}"
+                        echo "I execute on branch ${env.BRANCH_NAME}"
                     }
                 }
                 input 'Do you approve deployment?'
