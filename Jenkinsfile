@@ -27,13 +27,6 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
-                echo 'Repository cloned successfully.'
-            }
-        }
-        
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
             }
         }
 
