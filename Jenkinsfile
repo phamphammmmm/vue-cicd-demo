@@ -12,7 +12,7 @@ pipeline {
         stage('Check branch') {
             steps {
                 script {
-                    def branchName = env.BRANCH_NAME ?: 'main' // fallback to 'main' if BRANCH_NAME is null
+                    def branchName = env.BRANCH_NAME
                     if (branchName == 'main') {
                         echo 'I only execute on the main branch'
                     } else {
