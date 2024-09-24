@@ -5,17 +5,22 @@ pipeline {
     }
 
     stages {
-        stage('Check branch') {
+         stage('Deliver for development') {
+            when {
+                branch 'dev'
+            }
             steps {
-                script {
-                    if (env.BRANCH_NAME == 'main') {
-                        echo 'I only execute on the main branch'
-                    } else {
-                        echo "I execute on branch ${env.BRANCH_NAME}"
-                    }
-                }
-                input 'Do you approve deployment?'
-                echo 'Hello Prod'
+                input message: 'Finished using the web dev site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
+        stage('Deploy for production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                input message: 'Finished using the web main site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
             }
         }
 
