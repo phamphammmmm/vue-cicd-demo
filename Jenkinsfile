@@ -3,14 +3,20 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS_ID = 'docker-hub-login'
     }
+
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Git branch to build from')
+    }
+
     stages {
         stage('Check branch') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'master') {
-                        echo 'I only execute on the master branch'
+                    def branchName = env.BRANCH_NAME ?: 'main' // fallback to 'main' if BRANCH_NAME is null
+                    if (branchName == 'main') {
+                        echo 'I only execute on the main branch'
                     } else {
-                        echo "I execute on branch ${env.BRANCH_NAME}"
+                        echo "I execute on branch ${branchName}"
                     }
                 }
                 input 'Do you approve deployment?'
@@ -18,6 +24,13 @@ pipeline {
             }
         }
 
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
+                echo 'Repository cloned successfully.'
+            }
+        }
+        
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/phamphammmmm/vue-cicd-demo.git'
