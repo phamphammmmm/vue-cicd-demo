@@ -8,7 +8,7 @@ pipeline {
         stage('Check branch') {
             steps {
                 script {
-                    if (branchName == 'main') {
+                    if (env.BRANCH_NAME == 'main') {
                         echo 'I only execute on the main branch'
                     } else {
                         echo "I execute on branch ${env.BRANCH_NAME}"
